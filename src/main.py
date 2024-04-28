@@ -61,6 +61,7 @@ def collect_data(
     save([asdict(ad) for ad in ads], os.path.join(reports_dir, "ads.json"))
 
     #  NOTE: Change the date range as needed
+
     # condition = "segments.date DURING TODAY"
     condition = "segments.date BETWEEN '2023-07-01' AND '2024-04-28'"
 
