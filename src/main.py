@@ -17,8 +17,7 @@ from src.db import populate_db
 from src.geo_target import fetch_latest_geo_targets
 from src.metrics import GMetricsType, fetch_metrics
 
-if sys.version_info < (3,):
-    raise Exception("Python 2 is not supported")
+assert sys.version_info >= (3,), "Python 3 is required"
 
 
 def save(data: List[Mapping[str, Any]], path: str) -> None:

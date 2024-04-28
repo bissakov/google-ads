@@ -59,6 +59,8 @@ def account_structure(
                 customer_id=str(account_id), query=query
             )
 
+            assert response is not None
+
             for googleads_row in response:
                 account_client = googleads_row.customer_client
 

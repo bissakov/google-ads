@@ -22,7 +22,7 @@ class GMetricsType(Enum):
 
 class GMetricsFactory:
     @staticmethod
-    def create_metrics(metric_type: GMetricsType, **kwargs):
+    def create_metrics(metric_type: GMetricsType, **kwargs: Any) -> "GMetrics":
         if metric_type == GMetricsType.GENERAL:
             return GGeneralMetrics(**kwargs)
         elif metric_type == GMetricsType.GENDER:

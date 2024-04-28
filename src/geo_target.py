@@ -2,13 +2,13 @@ import logging
 import os
 import urllib.parse
 import zipfile
-from typing import Any, Dict, Hashable, Union
+from typing import Union
 
 import bs4
 import pandas as pd
 import requests
 from sqlalchemy import insert, select, update
-from sqlalchemy.engine.base import Connection, Engine
+from sqlalchemy.engine.base import Engine
 from sqlalchemy.sql import Insert, Update
 
 from src.db import build_connection_url, create_engine
