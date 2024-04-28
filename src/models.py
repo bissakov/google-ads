@@ -61,7 +61,7 @@ class Base(DeclarativeBase):
 
 class GeoTarget(Base):
     __tablename__ = "GeoTargets"
-    id = Column(BigInteger, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(NVARCHAR(128))
     canonical_name = Column(NVARCHAR(128))
     parent_id = Column(BigInteger)
