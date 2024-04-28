@@ -4,7 +4,16 @@ from abc import abstractmethod
 from enum import Enum
 from typing import Any, Dict
 
-from sqlalchemy import NVARCHAR, Column, Date, Float, ForeignKey, Integer, MetaData
+from sqlalchemy import (
+    NVARCHAR,
+    BigInteger,
+    Column,
+    Date,
+    Float,
+    ForeignKey,
+    Integer,
+    MetaData,
+)
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 db_type = os.getenv("DB_TYPE")
@@ -52,7 +61,7 @@ class Base(DeclarativeBase):
 
 class GeoTarget(Base):
     __tablename__ = "GeoTargets"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     name = Column(NVARCHAR(128))
     canonical_name = Column(NVARCHAR(128))
     parent_id = Column(Integer)
@@ -65,7 +74,7 @@ class GeoTarget(Base):
 
 class Account(Base):
     __tablename__ = "Accounts"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     name = Column(NVARCHAR(128))
     resource_name = Column(NVARCHAR(128))
     account_customer = Column(NVARCHAR(128))
@@ -81,7 +90,7 @@ class Account(Base):
 
 class Campaign(Base):
     __tablename__ = "Campaigns"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     account_id = Column(Integer, ForeignKey("Accounts.id"))
     name = Column(NVARCHAR(128))
     resource_name = Column(NVARCHAR(128))
@@ -102,7 +111,7 @@ class Campaign(Base):
 
 class AdGroup(Base):
     __tablename__ = "AdGroups"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
     account_id = Column(Integer, ForeignKey("Accounts.id"))
     name = Column(NVARCHAR(128))
@@ -118,7 +127,7 @@ class AdGroup(Base):
 
 class Ad(Base):
     __tablename__ = "Ads"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
     ad_group_id = Column(Integer, ForeignKey("AdGroups.id"))
     account_id = Column(Integer, ForeignKey("Accounts.id"))
@@ -155,7 +164,7 @@ class MetricsFactory:
 
 class Metrics(Base):
     __tablename__ = "Metrics"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
     device = Column(NVARCHAR(128))
     date = Column(Date)
@@ -181,7 +190,7 @@ class Metrics(Base):
 
 class GenderMetrics(Base):
     __tablename__ = "GenderMetrics"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
     ad_group_id = Column(Integer, ForeignKey("AdGroups.id"))
     gender = Column(NVARCHAR(128))
@@ -210,7 +219,7 @@ class GenderMetrics(Base):
 
 class AgeMetrics(Base):
     __tablename__ = "AgeMetrics"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
     ad_group_id = Column(Integer, ForeignKey("AdGroups.id"))
     age_range = Column(NVARCHAR(128))
@@ -239,7 +248,7 @@ class AgeMetrics(Base):
 
 class GeoMetrics(Base):
     __tablename__ = "GeoMetrics"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
     country_id = Column(Integer, ForeignKey("GeoTargets.id"))
     device = Column(NVARCHAR(128))
