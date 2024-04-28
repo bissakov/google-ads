@@ -18,7 +18,7 @@ from src.models import Account, Ad, AdGroup, Base, Campaign, MetricsFactory, Met
 from src.utils import batched
 
 logger = logging.getLogger(__name__)
-BATCH_SIZE = 500
+BATCH_SIZE = 2000
 
 
 def build_connection_url() -> str:
@@ -169,18 +169,18 @@ def insert_metrics(
     db_metrics_type: MetricsType,
 ) -> None:
     with open(json_report, "r") as file:
-        g_metrics = iter(
+        g_metrics = [
             GMetricsFactory.create_metrics(g_metrics_type, **metric)
             for metric in json.load(file)
-        )
+        ]
 
     DBMetrics = MetricsFactory.create_metrics(db_metrics_type)
 
-    for batch in batched(g_metrics, BATCH_SIZE):
+    batch_number = len(g_metrics) // BATCH_SIZE + 1
+    for idx, batch in enumerate(batched(g_metrics, BATCH_SIZE), start=1):
         with engine.begin() as connection:
             for record in batch:
                 metrics = DBMetrics(**dataclasses.asdict(record))
-                logger.debug(f"Inserting general_metrics: {metrics}")
 
                 stmt: Union[Insert, Update]
                 if connection.execute(
@@ -194,6 +194,9 @@ def insert_metrics(
                 else:
                     stmt = insert(DBMetrics).values(**metrics.to_dict())
                 connection.execute(stmt)
+            logger.info(
+                f"{db_metrics_type.value} - Batch {idx}/{batch_number} inserted."
+            )
 
 
 def populate_db(current_day_report_dir: str) -> None:
