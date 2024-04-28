@@ -23,7 +23,6 @@ BATCH_SIZE = 2000
 
 def build_connection_url() -> str:
     db_type = os.getenv("DB_TYPE")
-    assert db_type, "Missing DB_TYPE environment variable."
     assert db_type in ["SQL Server", "SQLite"], "Invalid DB_TYPE."
 
     if db_type == "SQL Server":
