@@ -250,7 +250,7 @@ class GeoMetrics(Base):
     __tablename__ = "GeoMetrics"
     id = Column(BigInteger, primary_key=True, index=True)
     campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
-    country_id = Column(BigInteger, ForeignKey("GeoTargets.id"))
+    country_id = Column(Integer, ForeignKey("GeoTargets.id"))
     device = Column(NVARCHAR(128))
     date = Column(Date)
     average_cpv = Column(Float)
