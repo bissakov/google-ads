@@ -156,6 +156,116 @@ def insert_geo_targets(df: pd.DataFrame) -> None:
     logging.info("Geo targets saved to database")
 
 
+def insert_restricted_locations() -> None:
+    restricted_geo_targets = [
+        GeoTarget(
+            id=21120,
+            name="Crimea",
+            canonical_name="Crimea",
+            parent_id=None,
+            country_code="UA",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=2192,
+            name="Cuba",
+            canonical_name="Cuba",
+            parent_id=None,
+            country_code="CU",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=21113,
+            name="So-called Donetsk People's Republic (DNR)",
+            canonical_name="So-called Donetsk People's Republic (DNR)",
+            parent_id=None,
+            country_code="UA",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=21111,
+            name="So-called Luhansk People's Republic (LNR)",
+            canonical_name="So-called Luhansk People's Republic (LNR)",
+            parent_id=None,
+            country_code="UA",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=2364,
+            name="Iran",
+            canonical_name="Iran",
+            parent_id=None,
+            country_code="IR",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=2770,
+            name="North Korea",
+            canonical_name="North Korea",
+            parent_id=None,
+            country_code="KP",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=2760,
+            name="Syria",
+            canonical_name="Syria",
+            parent_id=None,
+            country_code="SY",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=2408,
+            name="North Korea",
+            canonical_name="North Korea",
+            parent_id=None,
+            country_code="KP",
+            target_type="Country",
+            status="Active",
+        ),
+        GeoTarget(
+            id=2760,
+            name="Syria",
+            canonical_name="Syria",
+            parent_id=None,
+            country_code="SY",
+            target_type="Country",
+            status="Active",
+        ),
+    ]
+
+    logging.info("Saving restricted geo targets to database...")
+
+    connection_url = build_connection_url()
+
+    logging.info("Creating database engine...")
+    engine: Engine = create_engine(connection_url, echo=False)
+    logging.info("Database engine created")
+
+    with engine.begin() as connection:
+        for geo_target in restricted_geo_targets:
+            stmt: Union[Insert, Update]
+            if connection.execute(
+                select(GeoTarget.id).where(GeoTarget.id == geo_target.id)
+            ).fetchone():
+                stmt = (
+                    update(GeoTarget)
+                    .where(GeoTarget.id == geo_target.id)
+                    .values(**geo_target.to_dict())
+                )
+            else:
+                stmt = insert(GeoTarget).values(**geo_target.to_dict())
+            connection.execute(stmt)
+    logging.info("Restricted geo targets saved to database")
+
+
 def fetch_latest_geo_targets() -> None:
     logging.info("Fetching latest geo targets...")
 
@@ -183,6 +293,7 @@ def fetch_latest_geo_targets() -> None:
 
     df = parse_csv(resources_dir)
     insert_geo_targets(df)
+    insert_restricted_locations()
 
 
 if __name__ == "__main__":
