@@ -258,10 +258,25 @@ def insert_restricted_locations() -> None:
                 stmt = (
                     update(GeoTarget)
                     .where(GeoTarget.id == geo_target.id)
-                    .values(**geo_target.to_dict())
+                    .values(
+                        name=geo_target.name,
+                        canonical_name=geo_target.canonical_name,
+                        parent_id=geo_target.parent_id,
+                        country_code=geo_target.country_code,
+                        target_type=geo_target.target_type,
+                        status=geo_target.status,
+                    )
                 )
             else:
-                stmt = insert(GeoTarget).values(**geo_target.to_dict())
+                stmt = insert(GeoTarget).values(
+                    id=geo_target.id,
+                    name=geo_target.name,
+                    canonical_name=geo_target.canonical_name,
+                    parent_id=geo_target.parent_id,
+                    country_code=geo_target.country_code,
+                    target_type=geo_target.target_type,
+                    status=geo_target.status,
+                )
             connection.execute(stmt)
     logging.info("Restricted geo targets saved to database")
 
