@@ -64,7 +64,7 @@ class GeoTarget(Base):
     id = Column(BigInteger, primary_key=True, index=True)
     name = Column(NVARCHAR(128))
     canonical_name = Column(NVARCHAR(128))
-    parent_id = Column(Integer)
+    parent_id = Column(BigInteger)
     country_code = Column(NVARCHAR(128))
     target_type = Column(NVARCHAR(128))
     status = Column(NVARCHAR(128))
@@ -91,7 +91,7 @@ class Account(Base):
 class Campaign(Base):
     __tablename__ = "Campaigns"
     id = Column(BigInteger, primary_key=True, index=True)
-    account_id = Column(Integer, ForeignKey("Accounts.id"))
+    account_id = Column(BigInteger, ForeignKey("Accounts.id"))
     name = Column(NVARCHAR(128))
     resource_name = Column(NVARCHAR(128))
     status = Column(NVARCHAR(128))
@@ -112,8 +112,8 @@ class Campaign(Base):
 class AdGroup(Base):
     __tablename__ = "AdGroups"
     id = Column(BigInteger, primary_key=True, index=True)
-    campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
-    account_id = Column(Integer, ForeignKey("Accounts.id"))
+    campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
+    account_id = Column(BigInteger, ForeignKey("Accounts.id"))
     name = Column(NVARCHAR(128))
     resource_name = Column(NVARCHAR(128))
     status = Column(NVARCHAR(128))
@@ -128,9 +128,9 @@ class AdGroup(Base):
 class Ad(Base):
     __tablename__ = "Ads"
     id = Column(BigInteger, primary_key=True, index=True)
-    campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
-    ad_group_id = Column(Integer, ForeignKey("AdGroups.id"))
-    account_id = Column(Integer, ForeignKey("Accounts.id"))
+    campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
+    ad_group_id = Column(BigInteger, ForeignKey("AdGroups.id"))
+    account_id = Column(BigInteger, ForeignKey("Accounts.id"))
     name = Column(NVARCHAR(128))
     resource_name = Column(NVARCHAR(128))
     status = Column(NVARCHAR(128))
@@ -165,7 +165,7 @@ class MetricsFactory:
 class Metrics(Base):
     __tablename__ = "Metrics"
     id = Column(BigInteger, primary_key=True, index=True)
-    campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
+    campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
     device = Column(NVARCHAR(128))
     date = Column(Date)
     average_cpv = Column(Float)
@@ -191,8 +191,8 @@ class Metrics(Base):
 class GenderMetrics(Base):
     __tablename__ = "GenderMetrics"
     id = Column(BigInteger, primary_key=True, index=True)
-    campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
-    ad_group_id = Column(Integer, ForeignKey("AdGroups.id"))
+    campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
+    ad_group_id = Column(BigInteger, ForeignKey("AdGroups.id"))
     gender = Column(NVARCHAR(128))
     device = Column(NVARCHAR(128))
     date = Column(Date)
@@ -220,8 +220,8 @@ class GenderMetrics(Base):
 class AgeMetrics(Base):
     __tablename__ = "AgeMetrics"
     id = Column(BigInteger, primary_key=True, index=True)
-    campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
-    ad_group_id = Column(Integer, ForeignKey("AdGroups.id"))
+    campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
+    ad_group_id = Column(BigInteger, ForeignKey("AdGroups.id"))
     age_range = Column(NVARCHAR(128))
     device = Column(NVARCHAR(128))
     date = Column(Date)
@@ -249,8 +249,8 @@ class AgeMetrics(Base):
 class GeoMetrics(Base):
     __tablename__ = "GeoMetrics"
     id = Column(BigInteger, primary_key=True, index=True)
-    campaign_id = Column(Integer, ForeignKey("Campaigns.id"))
-    country_id = Column(Integer, ForeignKey("GeoTargets.id"))
+    campaign_id = Column(BigInteger, ForeignKey("Campaigns.id"))
+    country_id = Column(BigInteger, ForeignKey("GeoTargets.id"))
     device = Column(NVARCHAR(128))
     date = Column(Date)
     average_cpv = Column(Float)
