@@ -175,7 +175,7 @@ def insert_metrics(
 
     DBMetrics = MetricsFactory.create_metrics(db_metrics_type)
 
-    batch_number = len(g_metrics) // BATCH_SIZE + 1
+    batch_count = len(g_metrics) // BATCH_SIZE + 1
     for idx, batch in enumerate(batched(g_metrics, BATCH_SIZE), start=1):
         with engine.begin() as connection:
             for record in batch:
@@ -194,7 +194,7 @@ def insert_metrics(
                     stmt = insert(DBMetrics).values(**metrics.to_dict())
                 connection.execute(stmt)
             logger.info(
-                f"{db_metrics_type.value} - Batch {idx}/{batch_number} inserted."
+                f"{db_metrics_type.value} - Batch {idx}/{batch_count} inserted."
             )
 
 
