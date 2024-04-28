@@ -1,0 +1,11 @@
+.idea/*
+venv/*
+logs/*
+reports/*
+*/__pycache__/*
+resources/*
+src_old/*
+
+.dmypy.json
+google-ads.yaml
+.env
