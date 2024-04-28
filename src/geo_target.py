@@ -150,7 +150,7 @@ def insert_geo_targets(df: pd.DataFrame) -> None:
     batch_count = len(records) // batch_size + 1
     for idx, batch in enumerate(batched(records, batch_size), start=1):
         with engine.begin() as connection:
-            connection.execute(insert(GeoTarget).values(batch))
+            connection.execute(insert(GeoTarget), batch)
         logging.info(f"GeoTarget - Batch {idx}/{batch_count} inserted.")
 
     logging.info("Geo targets saved to database")
