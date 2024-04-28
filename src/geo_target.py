@@ -119,36 +119,6 @@ def parse_csv(resources_dir: str) -> pd.DataFrame:
     return df
 
 
-def insert_geo_target(connection: Connection, row: Dict[Hashable, Any]) -> None:
-    stmt: Union[Insert, Update]
-    if connection.execute(
-        select(GeoTarget.id).where(GeoTarget.id == row["id"])
-    ).fetchone():
-        stmt = (
-            update(GeoTarget)
-            .where(GeoTarget.id == row["id"])
-            .values(
-                name=row["name"],
-                canonical_name=row["canonical_name"],
-                parent_id=row["parent_id"],
-                country_code=row["country_code"],
-                target_type=row["target_type"],
-                status=row["status"],
-            )
-        )
-    else:
-        stmt = insert(GeoTarget).values(
-            id=row["id"],
-            name=row["name"],
-            canonical_name=row["canonical_name"],
-            parent_id=row["parent_id"],
-            country_code=row["country_code"],
-            target_type=row["target_type"],
-            status=row["status"],
-        )
-    connection.execute(stmt)
-
-
 def insert_geo_targets(df: pd.DataFrame) -> None:
     logging.info("Saving geo targets to database...")
 
@@ -160,16 +130,28 @@ def insert_geo_targets(df: pd.DataFrame) -> None:
 
     GeoTarget.__table__.create(bind=engine, checkfirst=True)
 
+    logging.info("Checking for existing geo targets...")
+    with engine.connect() as connection:
+        existing_ids = {
+            row[0] for row in connection.execute(select(GeoTarget.id)).fetchall()
+        }
+
+    df = df[~df["id"].isin(existing_ids)]
+    logging.info(f"New geo targets to insert: {df.shape}")
+
+    if df.empty:
+        logging.info("No new geo targets to insert")
+        return
+
     logging.info("Inserting geo targets...")
 
     batch_size = 25000
-    for batch in batched(df.to_dict(orient="records"), batch_size):
+    records = df.to_dict(orient="records")
+    batch_count = len(records) // batch_size + 1
+    for idx, batch in enumerate(batched(records, batch_size), start=1):
         with engine.begin() as connection:
-            for row in batch:
-                insert_geo_target(connection, row)
-        logging.info(
-            f"{batch_size} geo targets inserted or updated. Committing transaction..."
-        )
+            connection.execute(insert(GeoTarget).values(batch))
+        logging.info(f"GeoTarget - Batch {idx}/{batch_count} inserted.")
 
     logging.info("Geo targets saved to database")
 
