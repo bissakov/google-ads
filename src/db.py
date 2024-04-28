@@ -197,7 +197,7 @@ def insert_metrics(
                 else:
                     stmt = insert(DBMetrics).values(**metrics.to_dict())
                 connection.execute(stmt)
-            logger.info(
+            logger.debug(
                 f"{db_metrics_type.value} - Batch {idx}/{batch_count} inserted."
             )
 

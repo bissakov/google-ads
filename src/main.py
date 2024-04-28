@@ -128,6 +128,8 @@ def main() -> None:
 
     populate_db(current_day_reports_dir)
 
+    logging.info("Finished the main process.")
+
 
 if __name__ == "__main__":
     main()
