@@ -62,8 +62,8 @@ def collect_data(
 
     #  NOTE: Change the date range as needed
 
-    # condition = "segments.date DURING TODAY"
-    condition = "segments.date BETWEEN '2023-07-01' AND '2024-04-28'"
+    condition = "segments.date DURING LAST_7_DAYS"
+    # condition = f"segments.date BETWEEN '2023-07-01' AND {datetime.now(pytz.utc).strftime('%Y-%m-%d')}"
 
     general_metrics = fetch_metrics(
         GMetricsType.GENERAL,
