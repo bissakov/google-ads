@@ -88,7 +88,7 @@ def insert_accounts(current_day_report_dir: str, engine: Engine) -> None:
                 stmt = (
                     update(Account)
                     .where(Account.id == account.id)
-                    .values(**account.to_dict())
+                    .values(**account.to_dict(exclude_cols=["id"]))
                 )
             else:
                 stmt = insert(Account).values(**account.to_dict())
@@ -112,7 +112,7 @@ def insert_campaigns(current_day_report_dir: str, engine: Engine) -> None:
                 stmt = (
                     update(Campaign)
                     .where(Campaign.id == campaign.id)
-                    .values(**campaign.to_dict())
+                    .values(**campaign.to_dict(exclude_cols=["id"]))
                 )
             else:
                 stmt = insert(Campaign).values(**campaign.to_dict())
@@ -136,7 +136,7 @@ def insert_ad_groups(current_day_report_dir: str, engine: Engine) -> None:
                 stmt = (
                     update(AdGroup)
                     .where(AdGroup.id == ad_group.id)
-                    .values(**ad_group.to_dict())
+                    .values(**ad_group.to_dict(exclude_cols=["id"]))
                 )
             else:
                 stmt = insert(AdGroup).values(**ad_group.to_dict())
@@ -155,7 +155,11 @@ def insert_ads(current_day_report_dir: str, engine: Engine) -> None:
 
             stmt: Union[Insert, Update]
             if connection.execute(select(Ad.id).where(Ad.id == ad.id)).fetchone():
-                stmt = update(Ad).where(Ad.id == ad.id).values(**ad.to_dict())
+                stmt = (
+                    update(Ad)
+                    .where(Ad.id == ad.id)
+                    .values(**ad.to_dict(exclude_cols=["id"]))
+                )
             else:
                 stmt = insert(Ad).values(**ad.to_dict())
             connection.execute(stmt)
@@ -188,7 +192,7 @@ def insert_metrics(
                     stmt = (
                         update(DBMetrics)
                         .where(DBMetrics.id == metrics.id)
-                        .values(**metrics.to_dict())
+                        .values(**metrics.to_dict(exclude_cols=["id"]))
                     )
                 else:
                     stmt = insert(DBMetrics).values(**metrics.to_dict())

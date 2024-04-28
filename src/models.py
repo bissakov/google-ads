@@ -2,7 +2,7 @@ import logging
 import os
 from abc import abstractmethod
 from enum import Enum
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 
 from sqlalchemy import (
     NVARCHAR,
@@ -50,10 +50,11 @@ class Base(DeclarativeBase):
         else:
             return f"<{class_name} {self.id}>"
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self, exclude_cols: Optional[List[str]] = None) -> Dict[str, Any]:
+        exclude_cols = exclude_cols or []
         class_dict = {}
         for key, value in self.__dict__.items():
-            if key.startswith("_"):
+            if key.startswith("_") or key in exclude_cols:
                 continue
             class_dict[key] = value
         return class_dict
