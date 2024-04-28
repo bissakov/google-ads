@@ -61,7 +61,8 @@ def collect_data(
     save([asdict(ad) for ad in ads], os.path.join(reports_dir, "ads.json"))
 
     #  NOTE: Change the date range as needed
-    condition = "segments.date DURING TODAY"
+    # condition = "segments.date DURING TODAY"
+    condition = "segments.date BETWEEN '2023-07-01' AND '2024-04-28'"
 
     general_metrics = fetch_metrics(
         GMetricsType.GENERAL,
@@ -122,7 +123,6 @@ def main() -> None:
     logging.info("Google Ads client loaded")
     root_account_id = "4091725735"
     logging.info(f"Root account ID: {root_account_id}")
-
     collect_data(client, root_account_id, current_day_reports_dir)
 
     populate_db(current_day_reports_dir)
