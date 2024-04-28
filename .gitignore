@@ -9,3 +9,4 @@ src_old/*
 .dmypy.json
 google-ads.yaml
 .env
+*.db
