@@ -28,9 +28,9 @@ def build_connection_url() -> str:
     if db_type == "SQL Server":
         logger.warning("Production mode")
 
-        user = os.getenv("USER")
-        password = os.getenv("PASSWORD")
-        host = os.getenv("HOST")
+        user = os.getenv("UID")
+        password = os.getenv("PWD")
+        host = os.getenv("SERVER")
         port = os.getenv("PORT")
         database = os.getenv("DATABASE")
         driver = os.getenv("DRIVER")
