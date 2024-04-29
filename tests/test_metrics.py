@@ -52,7 +52,7 @@ with open(os.path.join(tests_dir, "data", "target_metrics.json")) as f:
 )
 def test_metrics(
     target: TargetMetrics, table: Union[Metrics, GenderMetrics, AgeMetrics, GeoMetrics]
-):
+) -> None:
     with engine.begin() as connection:
         rows = connection.execute(
             select(
