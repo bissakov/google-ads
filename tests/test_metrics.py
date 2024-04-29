@@ -15,7 +15,7 @@ Number = Union[int, float]
 
 @functools.lru_cache(maxsize=None)
 def num_sim(n1: Number, n2: Number) -> Number:
-    if n1 == 0 and n2 == 0:
+    if n1 == n2:
         return 1
     return 1 - abs(n1 - n2) / (n1 + n2)
 
