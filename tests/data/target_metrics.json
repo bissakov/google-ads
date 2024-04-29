@@ -1,0 +1,178 @@
+[
+  {
+    "campaign_id": 21150343560,
+    "impressions": 5480000,
+    "cost": 3200,
+    "views": 0,
+    "start_date": "2024-04-04",
+    "end_date": "2024-04-24"
+  },
+  {
+    "campaign_id": 21038918522,
+    "impressions": 7600000,
+    "cost": 4490,
+    "views": 0,
+    "start_date": "2024-02-20",
+    "end_date": "2024-04-28"
+  },
+  {
+    "campaign_id": 20803684049,
+    "impressions": 423000,
+    "cost": 301,
+    "views": 18200,
+    "start_date": "2023-11-23",
+    "end_date": "2024-01-31"
+  },
+  {
+    "campaign_id": 20797359330,
+    "impressions": 904000,
+    "cost": 640,
+    "views": 51000,
+    "start_date": "2023-11-24",
+    "end_date": "2024-01-31"
+  },
+  {
+    "campaign_id": 20603356011,
+    "impressions": 2300000,
+    "cost": 1970,
+    "views": 645000,
+    "start_date": "2023-10-02",
+    "end_date": "2023-10-31"
+  },
+  {
+    "campaign_id": 20406755274,
+    "impressions": 7610000,
+    "cost": 8050,
+    "views": 2010000,
+    "start_date": "2023-08-01",
+    "end_date": "2023-09-30"
+  },
+  {
+    "campaign_id": 21038999423,
+    "impressions": 1470000,
+    "cost": 812.28,
+    "views": 0,
+    "start_date": "2024-02-20",
+    "end_date": "2024-03-31"
+  },
+  {
+    "campaign_id": 20610081044,
+    "impressions": 6310000,
+    "cost": 6144.36,
+    "views": 1510000,
+    "start_date": "2023-10-02",
+    "end_date": "2024-01-31"
+  },
+  {
+    "campaign_id": 20670796072,
+    "impressions": 15500000,
+    "cost": 5022.85,
+    "views": 2340000,
+    "start_date": "2023-10-16",
+    "end_date": "2023-12-31"
+  },
+  {
+    "campaign_id": 20406755160,
+    "impressions": 5530000,
+    "cost": 4070.05,
+    "views": 4520000,
+    "start_date": "2023-08-01",
+    "end_date": "2023-08-31"
+  },
+  {
+    "campaign_id": 20488547672,
+    "impressions": 22100000,
+    "cost": 22100,
+    "views": 3650000,
+    "start_date": "2023-08-24",
+    "end_date": "2024-04-30"
+  },
+  {
+    "campaign_id": 20406755229,
+    "impressions": 10600000,
+    "cost": 9001.61,
+    "views": 3460000,
+    "start_date": "2023-08-01",
+    "end_date": "2023-09-30"
+  },
+  {
+    "campaign_id": 20902475744,
+    "impressions": 216000,
+    "cost": 138.34,
+    "views": 48900,
+    "start_date": "2024-01-01",
+    "end_date": "2024-01-31"
+  },
+  {
+    "campaign_id": 20817127862,
+    "impressions": 2580000,
+    "cost": 2420,
+    "views": 0,
+    "start_date": "2023-11-29",
+    "end_date": "2023-12-31"
+  },
+  {
+    "campaign_id": 20558562421,
+    "impressions": 16100000,
+    "cost": 11700,
+    "views": 0,
+    "start_date": "2023-09-16",
+    "end_date": "2024-02-29"
+  },
+  {
+    "campaign_id": 21058761594,
+    "impressions": 3170000,
+    "cost": 1870,
+    "views": 0,
+    "start_date": "2024-03-01",
+    "end_date": "2024-03-31"
+  },
+  {
+    "campaign_id": 20784110149,
+    "impressions": 15200000,
+    "cost": 13800,
+    "views": 564000,
+    "start_date": "2023-11-16",
+    "end_date": "2023-12-31"
+  },
+  {
+    "campaign_id": 20406754752,
+    "impressions": 4020000,
+    "cost": 3130,
+    "views": 1310000,
+    "start_date": "2023-08-01",
+    "end_date": "2023-08-31"
+  },
+  {
+    "campaign_id": 20452189893,
+    "impressions": 16900000,
+    "cost": 14700,
+    "views": 5060000,
+    "start_date": "2023-08-16",
+    "end_date": "2024-02-29"
+  },
+  {
+    "campaign_id": 21042354178,
+    "impressions": 4430000,
+    "cost": 2411.49,
+    "views": 0,
+    "start_date": "2024-02-20",
+    "end_date": "2024-04-28"
+  },
+  {
+    "campaign_id": 20451159240,
+    "impressions": 12100000,
+    "cost": 11027.93,
+    "views": 3200000,
+    "start_date": "2023-08-16",
+    "end_date": "2023-12-31"
+  },
+  {
+    "campaign_id": 20419339111,
+    "impressions": 57500,
+    "cost": 4840,
+    "views": 0,
+    "start_date": "2023-08-01",
+    "end_date": "2023-09-30"
+  }
+]
