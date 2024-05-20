@@ -14,6 +14,7 @@ from src.ad import ad_structure
 from src.ad_group import ad_group_structure
 from src.campaign import campaign_structure
 from src.db import populate_db
+from src.error_handler import handle_global_exception
 from src.geo_target import fetch_latest_geo_targets
 from src.metrics import GMetricsType, fetch_metrics
 
@@ -98,6 +99,7 @@ def collect_data(
     )
 
 
+@handle_global_exception
 def main() -> None:
     logging.info("Starting the main process...")
     today = datetime.now(pytz.timezone("Asia/Almaty"))
